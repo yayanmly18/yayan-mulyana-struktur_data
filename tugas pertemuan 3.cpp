@@ -4,6 +4,11 @@
 
 using namespace std;
 
+// Nama pembuat program
+string namaPembuat = "Yayan Mulyana";
+string npmPembuat = "2310631170057";
+
+
 // Structure untuk data Mahasiswa
 struct Mahasiswa {
     string NPM;
@@ -26,6 +31,8 @@ void tampilkanData(const Mahasiswa[], const Nilai[], int);
 void editData(Mahasiswa[], Nilai[], int);
 void hapusData(Mahasiswa[], Nilai[], int&);
 void hitungNilai(Nilai&);
+void tampilkanHeader();
+void tampilkanGarisPemisah();
 
 int main() {
     // Deklarasi array untuk menyimpan data mahasiswa dan nilai
@@ -50,6 +57,8 @@ int main() {
                 inputData(dataMahasiswa, dataNilai, jumlahMahasiswa);
                 break;
             case 'R':
+                tampilkanHeader();
+                tampilkanGarisPemisah();
                 tampilkanData(dataMahasiswa, dataNilai, jumlahMahasiswa);
                 break;
             case 'U':
@@ -66,7 +75,22 @@ int main() {
         }
     } while (toupper(opsi) != 'X');
 
+    // Tampilkan nama pembuat program setelah keluar dari loop menu
+    cout << "Program dibuat oleh : " << namaPembuat << endl;
+    cout << "NPM                 : " << npmPembuat << endl;
+
     return 0;
+}
+
+// Fungsi untuk menampilkan header tabel
+void tampilkanHeader() {
+    cout << left << setw(5) << "No" << setw(15) << "NPM" << setw(20) << "Nama" << setw(25) << "Nilai Akhir" << setw(10) << "Index\n";
+}
+
+// Fungsi untuk menampilkan garis pemisah antara header dan data
+void tampilkanGarisPemisah() {
+    cout << setfill('-') << setw( 5 + 15 + 20 + 25 + 10) << "-" << endl;
+    cout << setfill(' ');
 }
 
 // Fungsi untuk input data mahasiswa
@@ -114,10 +138,10 @@ void hitungNilai(Nilai &nilai) {
 // Fungsi untuk menampilkan data mahasiswa
 void tampilkanData(const Mahasiswa dataMahasiswa[], const Nilai dataNilai[], int jumlah) {
     if (jumlah > 0) {
-        cout << "Data Mahasiswa:\n";
-        cout << setw(5) << "No" << setw(15) << "NPM" << setw(20) << "Nama" << setw(10) << "Nilai Akhir" << setw(10) << "Index\n";
         for (int i = 0; i < jumlah; ++i) {
-            cout << setw(5) << i + 1 << setw(15) << dataMahasiswa[i].NPM << setw(20) << dataMahasiswa[i].Nama << setw(10) << fixed << setprecision(2) << dataNilai[i].NilaiAkhir << setw(10) << dataNilai[i].IndexHuruf << endl;
+            cout << left << setw(5) << i + 1 << setw(15) << dataMahasiswa[i].NPM << setw(20) << dataMahasiswa[i].Nama
+                 << setw(25) << fixed << setprecision(2) << dataNilai[i].NilaiAkhir
+                 << "  " << setw(10) << dataNilai[i].IndexHuruf << endl;
         }
     } else {
         cout << "Belum ada data mahasiswa.\n";
@@ -153,9 +177,8 @@ void editData(Mahasiswa dataMahasiswa[], Nilai dataNilai[], int jumlah) {
         if (!ditemukan) {
             cout << "NPM tidak ditemukan.\n";
         }
-    } else {
+    } else
         cout << "Belum ada data mahasiswa.\n";
-    }
 }
 
 // Fungsi untuk menghapus data mahasiswa
@@ -167,6 +190,7 @@ void hapusData(Mahasiswa dataMahasiswa[], Nilai dataNilai[], int &jumlah) {
         bool ditemukan = false;
         for (int i = 0; i < jumlah; ++i) {
             if (dataMahasiswa[i].NPM == cariNPM) {
+                // Menggeser data untuk menutupi data yang dihapus
                 for (int j = i; j < jumlah - 1; ++j) {
                     dataMahasiswa[j] = dataMahasiswa[j + 1];
                     dataNilai[j] = dataNilai[j + 1];
@@ -180,7 +204,6 @@ void hapusData(Mahasiswa dataMahasiswa[], Nilai dataNilai[], int &jumlah) {
         if (!ditemukan) {
             cout << "NPM tidak ditemukan.\n";
         }
-    } else {
+    } else
         cout << "Belum ada data mahasiswa.\n";
-    }
 }
