@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// Define the structure of a node
+// Mendefinisikan struktur sebuah node
 struct Node
 {
     int data;
@@ -9,39 +9,39 @@ struct Node
     Node(int val) : data(val), next(nullptr) {}
 };
 
-// Function to reverse the linked list
+// Fungsi untuk membalik linked list
 Node *reverseLinkedList(Node *head)
 {
-    Node *prev = nullptr;
-    Node *curr = head;
-    Node *nextNode = nullptr;
+    Node *prev = nullptr; // Node sebelumnya awalnya null
+    Node *curr = head; // Node saat ini adalah head
+    Node *nextNode = nullptr; // Node selanjutnya awalnya null
 
-    while (curr != nullptr)
+    while (curr != nullptr) // Selama masih ada node saat ini
     {
-        nextNode = curr->next;
-        curr->next = prev;
-        prev = curr;
-        curr = nextNode;
+        nextNode = curr->next; // Simpan node selanjutnya
+        curr->next = prev; // Balik pointer ke node sebelumnya
+        prev = curr; // Pindahkan pointer node sebelumnya ke node saat ini
+        curr = nextNode; // Pindahkan pointer node saat ini ke node selanjutnya
     }
 
-    return prev;
+    return prev; // Kembalikan node terakhir yang sekarang menjadi head
 }
 
-// Function to print the linked list
+// Fungsi untuk mencetak linked list
 void printLinkedList(Node *head)
 {
-    while (head != nullptr)
+    while (head != nullptr) // Selama masih ada node
     {
-        cout << head->data << " ";
-        head = head->next;
+        cout << head->data << " "; // Cetak data node saat ini
+        head = head->next; // Pindahkan pointer ke node selanjutnya
     }
     cout << endl;
 }
 
 int main()
 {
-    // Create a sample linked list: 1 -> 2 -> 3 -> 4 -> 5
-    Node *head = new Node(1);
+    // Membuat linked list contoh: 1 -> 2 -> 3 -> 4 -> 5
+    Node *head = new Node(1); // Node pertama (head)
     head->next = new Node(2);
     head->next->next = new Node(3);
     head->next->next->next = new Node(4);
@@ -53,17 +53,17 @@ int main()
     head->next->next->next->next->next->next->next->next->next = new Node(10);
 
     cout << "Normal  : ";
-    printLinkedList(head);
+    printLinkedList(head); // Cetak linked list normal
 
-    // Reverse the linked list
+    // Memutar balik linked list
     head = reverseLinkedList(head);
 
     cout << "Reverse : ";
-    printLinkedList(head);
+    printLinkedList(head); // Cetak linked list yang sudah dibalik
 
-    cout << "Nama  : Yayan Mulyana" << endl;
-    cout << "NPM   : 2310631170057" << endl;
-    cout << "Kelas : 2C INFORMATIKA" << endl;
+    cout << "Nama  : Yayan Mulyana" << endl; // Cetak nama
+    cout << "NPM   : 2310631170057" << endl; // Cetak NPM
+    cout << "Kelas : 2C INFORMATIKA" << endl; // Cetak kelas
 
     return 0;
 }
